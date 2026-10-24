@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "title": "Set up project repository",
+    "description": "Initialize the Git repository and the TypeScript project.",
+    "status": "done",
+    "createdAt": "2026-10-20T09:00:00.000Z",
+    "updatedAt": "2026-10-20T11:30:00.000Z"
+  },
+  {
+    "id": "2",
+    "title": "Implement GET /tasks",
+    "description": "Build the task listing endpoint through every layer.",
+    "status": "in_progress",
+    "createdAt": "2026-10-21T10:15:00.000Z",
+    "updatedAt": "2026-10-22T14:00:00.000Z"
+  },
+  {
+    "id": "3",
+    "title": "Write unit tests for TaskService",
+    "description": "Cover the listing logic using a fake repository.",
+    "status": "pending",
+    "createdAt": "2026-10-22T08:45:00.000Z",
+    "updatedAt": "2026-10-22T08:45:00.000Z"
+  },
+  {
+    "id": "4",
+    "title": "Plan database migration",
+    "description": "Compare PostgreSQL and MongoDB for the persistence layer.",
+    "status": "pending",
+    "createdAt": "2026-10-23T16:20:00.000Z",
+    "updatedAt": "2026-10-23T16:20:00.000Z"
+  }
+]
