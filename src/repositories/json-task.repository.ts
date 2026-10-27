@@ -1,7 +1,7 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { DataSourceError } from '../errors/app-error';
 import { TASK_STATUSES, type Task } from '../types/task';
-import type { TaskRepository } from './task.repository';
+import type { CreateTask, TaskRepository } from './task.repository';
 
 function isTask(value: unknown): value is Task {
     if (typeof value !== 'object' || value === null) return false;
@@ -19,6 +19,41 @@ function isTask(value: unknown): value is Task {
 
 export class JsonTaskRepository implements TaskRepository {
     constructor(private readonly filePath: string) {}
+
+    async create({
+        title,
+        description,
+        status,
+        priority,
+    }: CreateTask): Promise<Task> {
+        const parsed = await this.readTasks();
+        const newTask: Task = {
+            id: crypto.randomUUID(),
+            title: title,
+            description: description,
+            status: status,
+            priority: priority,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        };
+
+        parsed.push(newTask);
+        try {
+            await writeFile(
+                this.filePath,
+                JSON.stringify(parsed, null, 2),
+                'utf-8',
+            );
+        } catch (err) {
+            console.error(
+                `[JsonTaskRepository] Could not write ${this.filePath}:`,
+                err,
+            );
+            throw new DataSourceError('Could not write tasks data');
+        }
+
+        return newTask;
+    }
 
     async findById(id: string): Promise<Task | null> {
         const parsed = await this.readTasks();

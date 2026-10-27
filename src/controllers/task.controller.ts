@@ -24,4 +24,12 @@ export class TaskController {
         const task = await this.taskService.listTaskById(id);
         res.status(200).json({ data: task });
     };
+
+    create = async (
+        req: Request,
+        res: Response<SuccessResponse<Task>>,
+    ): Promise<void> => {
+        const task = await this.taskService.createTask(req.body);
+        res.status(201).json({ data: task });
+    };
 }

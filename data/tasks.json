@@ -1,34 +1,20 @@
 [
   {
-    "id": "1",
-    "title": "Set up project repository",
-    "description": "Initialize the Git repository and the TypeScript project.",
-    "status": "done",
-    "createdAt": "2026-10-20T09:00:00.000Z",
-    "updatedAt": "2026-10-20T11:30:00.000Z"
+    "id": "2f41c847-fb5f-4ff1-87bc-e7924eb1c62a",
+    "title": "Task 1",
+    "description": "This is the first task.",
+    "status": "pending",
+    "priority": "high",
+    "createdAt": "2026-10-27T02:45:51.109Z",
+    "updatedAt": "2026-10-27T02:45:51.109Z"
   },
   {
-    "id": "2",
-    "title": "Implement GET /tasks",
-    "description": "Build the task listing endpoint through every layer.",
+    "id": "889856ca-af44-4a87-b6d6-88a3b54bab56",
+    "title": "Task 2",
+    "description": "This is the second task.",
     "status": "in_progress",
-    "createdAt": "2026-10-21T10:15:00.000Z",
-    "updatedAt": "2026-10-22T14:00:00.000Z"
-  },
-  {
-    "id": "3",
-    "title": "Write unit tests for TaskService",
-    "description": "Cover the listing logic using a fake repository.",
-    "status": "pending",
-    "createdAt": "2026-10-22T08:45:00.000Z",
-    "updatedAt": "2026-10-22T08:45:00.000Z"
-  },
-  {
-    "id": "4",
-    "title": "Plan database migration",
-    "description": "Compare PostgreSQL and MongoDB for the persistence layer.",
-    "status": "pending",
-    "createdAt": "2026-10-23T16:20:00.000Z",
-    "updatedAt": "2026-10-23T16:20:00.000Z"
+    "priority": "medium",
+    "createdAt": "2026-10-27T02:46:47.397Z",
+    "updatedAt": "2026-10-27T02:46:47.397Z"
   }
 ]

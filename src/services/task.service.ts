@@ -1,5 +1,8 @@
 import { NotFoundError } from '../errors/app-error';
-import type { TaskRepository } from '../repositories/task.repository';
+import type {
+    CreateTask,
+    TaskRepository,
+} from '../repositories/task.repository';
 import type { Task } from '../types/task';
 
 export class TaskService {
@@ -24,5 +27,9 @@ export class TaskService {
         }
 
         return task;
+    }
+
+    async createTask(task: CreateTask): Promise<Task> {
+        return this.taskRepository.create(task);
     }
 }
