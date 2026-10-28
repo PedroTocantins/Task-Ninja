@@ -1,4 +1,4 @@
-import { NotFoundError } from '../errors/app-error';
+import { TaskNotFoundError } from '../errors/app-error';
 import type {
     CreateTask,
     TaskRepository,
@@ -20,11 +20,11 @@ export class TaskService {
         );
     }
 
-    async listTaskById(id: string): Promise<Task | null> {
+    async getTaskById(id: string): Promise<Task | null> {
         const task = await this.taskRepository.findById(id);
 
         if (!task) {
-            throw new NotFoundError(`Task ${id} not found. `);
+            throw new TaskNotFoundError(id);
         }
 
         return task;
@@ -38,7 +38,7 @@ export class TaskService {
         const updatedTask = await this.taskRepository.update(id, task);
 
         if (!updatedTask) {
-            throw new NotFoundError(`Task ${id} not found. `);
+            throw new TaskNotFoundError(id);
         }
 
         return updatedTask;
@@ -48,7 +48,7 @@ export class TaskService {
         const task = await this.taskRepository.findById(id);
 
         if (!task) {
-            throw new NotFoundError(`Task ${id} not found. `);
+            throw new TaskNotFoundError(id);
         }
 
         await this.taskRepository.delete(id);

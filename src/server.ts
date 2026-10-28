@@ -4,5 +4,5 @@ import { env } from './config/env';
 const app = createApp();
 
 app.listen(env.port, () => {
-  console.log(`TaskNinja API running on http://localhost:${env.port} (${env.nodeEnv})`);
+    console.log(`TaskNinja API running on http://localhost:${env.port} (${env.nodeEnv})`);
 });

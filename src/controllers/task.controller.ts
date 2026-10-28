@@ -16,12 +16,12 @@ export class TaskController {
         res.status(200).json({ data: tasks });
     };
 
-    listById = async (
+    getById = async (
         req: Request<{ id: string }>,
         res: Response<SuccessResponse<Task | null>>,
     ): Promise<void> => {
         const { id } = req.params;
-        const task = await this.taskService.listTaskById(id);
+        const task = await this.taskService.getTaskById(id);
         res.status(200).json({ data: task });
     };
 
