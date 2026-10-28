@@ -32,4 +32,22 @@ export class TaskController {
         const task = await this.taskService.createTask(req.body);
         res.status(201).json({ data: task });
     };
+
+    update = async (
+        req: Request<{ id: string }>,
+        res: Response<SuccessResponse<Task | null>>,
+    ): Promise<void> => {
+        const { id } = req.params;
+        const task = await this.taskService.updateTask(id, req.body);
+        res.status(200).json({ data: task });
+    };
+
+    delete = async (
+        req: Request<{ id: string }>,
+        res: Response<void>,
+    ): Promise<void> => {
+        const { id } = req.params;
+        await this.taskService.deleteTask(id);
+        res.status(204).send();
+    };
 }

@@ -9,8 +9,11 @@ export interface CreateTask {
     priority: TaskPriority;
 }
 
+export type UpdateTask = Partial<CreateTask>;
 export interface TaskRepository {
     findAll(): Promise<Task[]>;
     findById(id: string): Promise<Task | null>;
     create(task: CreateTask): Promise<Task>;
+    update(id: string, task: UpdateTask): Promise<Task | null>;
+    delete(id: string): Promise<void>;
 }

@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { DataSourceError } from '../errors/app-error';
 import { TASK_STATUSES, type Task } from '../types/task';
-import type { CreateTask, TaskRepository } from './task.repository';
+import type { CreateTask, TaskRepository, UpdateTask } from './task.repository';
 
 function isTask(value: unknown): value is Task {
     if (typeof value !== 'object' || value === null) return false;
@@ -26,7 +26,7 @@ export class JsonTaskRepository implements TaskRepository {
         status,
         priority,
     }: CreateTask): Promise<Task> {
-        const parsed = await this.readTasks();
+        const tasks = await this.readTasks();
         const newTask: Task = {
             id: crypto.randomUUID(),
             title: title,
@@ -37,27 +37,16 @@ export class JsonTaskRepository implements TaskRepository {
             updatedAt: new Date().toISOString(),
         };
 
-        parsed.push(newTask);
-        try {
-            await writeFile(
-                this.filePath,
-                JSON.stringify(parsed, null, 2),
-                'utf-8',
-            );
-        } catch (err) {
-            console.error(
-                `[JsonTaskRepository] Could not write ${this.filePath}:`,
-                err,
-            );
-            throw new DataSourceError('Could not write tasks data');
-        }
+        tasks.push(newTask);
+
+        await this.writeTasks(tasks);
 
         return newTask;
     }
 
     async findById(id: string): Promise<Task | null> {
-        const parsed = await this.readTasks();
-        const task = parsed.find((t) => t.id === id);
+        const tasks = await this.readTasks();
+        const task = tasks.find((t) => t.id === id);
         return task ?? null;
     }
 
@@ -92,5 +81,53 @@ export class JsonTaskRepository implements TaskRepository {
         }
 
         return parsed;
+    }
+
+    async update(id: string, task: UpdateTask): Promise<Task | null> {
+        const tasks = await this.readTasks();
+        const targetTask = tasks.find((t) => t.id === id);
+        if (!targetTask) {
+            return null;
+        }
+
+        const updatedTask: Task = {
+            ...targetTask,
+            ...task,
+            updatedAt: new Date().toISOString(),
+        };
+
+        const updatedTasks = tasks.map((t) => (t.id === id ? updatedTask : t));
+
+        await this.writeTasks(updatedTasks);
+
+        return updatedTask;
+    }
+
+    async delete(id: string): Promise<void> {
+        const tasks = await this.readTasks();
+        const deleteTask = tasks.find((t) => t.id === id);
+
+        if (!deleteTask) {
+            throw new DataSourceError(`Task with id ${id} not found`);
+        }
+
+        const updatedTasks = tasks.filter((t) => t.id !== id);
+        await this.writeTasks(updatedTasks);
+    }
+
+    private async writeTasks(tasks: Task[]): Promise<void> {
+        try {
+            await writeFile(
+                this.filePath,
+                JSON.stringify(tasks, null, 2),
+                'utf-8',
+            );
+        } catch (err) {
+            console.error(
+                `[JsonTaskRepository] Could not write ${this.filePath}:`,
+                err,
+            );
+            throw new DataSourceError('Could not write tasks data');
+        }
     }
 }

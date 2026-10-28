@@ -2,6 +2,7 @@ import { NotFoundError } from '../errors/app-error';
 import type {
     CreateTask,
     TaskRepository,
+    UpdateTask,
 } from '../repositories/task.repository';
 import type { Task } from '../types/task';
 
@@ -31,5 +32,25 @@ export class TaskService {
 
     async createTask(task: CreateTask): Promise<Task> {
         return this.taskRepository.create(task);
+    }
+
+    async updateTask(id: string, task: UpdateTask): Promise<Task | null> {
+        const updatedTask = await this.taskRepository.update(id, task);
+
+        if (!updatedTask) {
+            throw new NotFoundError(`Task ${id} not found. `);
+        }
+
+        return updatedTask;
+    }
+
+    async deleteTask(id: string): Promise<void> {
+        const task = await this.taskRepository.findById(id);
+
+        if (!task) {
+            throw new NotFoundError(`Task ${id} not found. `);
+        }
+
+        await this.taskRepository.delete(id);
     }
 }

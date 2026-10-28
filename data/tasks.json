@@ -7,14 +7,5 @@
     "priority": "high",
     "createdAt": "2026-10-27T02:45:51.109Z",
     "updatedAt": "2026-10-27T02:45:51.109Z"
-  },
-  {
-    "id": "889856ca-af44-4a87-b6d6-88a3b54bab56",
-    "title": "Task 2",
-    "description": "This is the second task.",
-    "status": "in_progress",
-    "priority": "medium",
-    "createdAt": "2026-10-27T02:46:47.397Z",
-    "updatedAt": "2026-10-27T02:46:47.397Z"
   }
 ]
