@@ -11,8 +11,19 @@ function parsePort(value: string | undefined): number {
     return port;
 }
 
+function parseDatabaseUrl(value: string | undefined): string {
+    if (!value) {
+        throw new Error(`DATABASE_URL is not set`);
+    }
+    return value;
+}
+
 export const env = {
     port: parsePort(process.env.PORT),
     nodeEnv: process.env.NODE_ENV ?? 'development',
-    tasksFilePath: path.resolve(process.cwd(), process.env.TASKS_FILE_PATH ?? 'data/tasks.json'),
+    tasksFilePath: path.resolve(
+        process.cwd(),
+        process.env.TASKS_FILE_PATH ?? 'data/tasks.json',
+    ),
+    databaseUrl: parseDatabaseUrl(process.env.DATABASE_URL),
 } as const;

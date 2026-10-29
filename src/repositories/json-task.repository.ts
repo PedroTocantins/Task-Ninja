@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { DataSourceError } from '../errors/app-error';
-import { TASK_STATUSES, type Task } from '../types/task';
+import { TASK_PRIORITIES, TASK_STATUSES, type Task } from '../types/task';
 import type { CreateTask, TaskRepository, UpdateTask } from './task.repository';
 import { randomUUID } from 'node:crypto';
 
@@ -13,6 +13,8 @@ function isTask(value: unknown): value is Task {
         typeof v.description === 'string' &&
         typeof v.status === 'string' &&
         (TASK_STATUSES as readonly string[]).includes(v.status) &&
+        typeof v.priority === 'string' &&
+        (TASK_PRIORITIES as readonly string[]).includes(v.priority) &&
         typeof v.createdAt === 'string' &&
         typeof v.updatedAt === 'string'
     );
@@ -76,16 +78,16 @@ export class JsonTaskRepository implements TaskRepository {
         return updatedTask;
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id: string): Promise<boolean> {
         const tasks = await this.readTasks();
-        const deleteTask = tasks.find((t) => t.id === id);
+        const updatedTasks = tasks.filter((t) => t.id !== id);
 
-        if (!deleteTask) {
-            throw new DataSourceError(`Task with id ${id} not found`);
+        if (updatedTasks.length === tasks.length) {
+            return false;
         }
 
-        const updatedTasks = tasks.filter((t) => t.id !== id);
         await this.writeTasks(updatedTasks);
+        return true;
     }
 
     private async readTasks(): Promise<Task[]> {
