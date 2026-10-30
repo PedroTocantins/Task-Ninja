@@ -1,7 +1,7 @@
-import { env } from './config/env';
-import { TaskController } from './controllers/task.controller';
-import { JsonTaskRepository } from './repositories/json-task.repository';
-import { TaskService } from './services/task.service';
+import { env } from './config/env.js';
+import { TaskController } from './controllers/task.controller.js';
+import { JsonTaskRepository } from './repositories/json-task.repository.js';
+import { TaskService } from './services/task.service.js';
 
 // Composition root: the only place that knows which concrete classes are used.
 // Swapping the data source means changing one line here.

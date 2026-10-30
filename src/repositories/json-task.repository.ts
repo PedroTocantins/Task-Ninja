@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { DataSourceError } from '../errors/app-error';
-import { TASK_PRIORITIES, TASK_STATUSES, type Task } from '../types/task';
-import type { CreateTask, TaskRepository, UpdateTask } from './task.repository';
+import { DataSourceError } from '../errors/app-error.js';
+import { TASK_PRIORITIES, TASK_STATUSES, type Task } from '../types/task.js';
+import type { CreateTask, TaskRepository, UpdateTask } from './task.repository.js';
 import { randomUUID } from 'node:crypto';
 
 function isTask(value: unknown): value is Task {

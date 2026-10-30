@@ -1,8 +1,8 @@
 import express, { type Express } from 'express';
-import { taskController } from './container';
-import { errorHandler } from './middlewares/error-handler';
-import { notFoundHandler } from './middlewares/not-found';
-import { createTaskRouter } from './routes/task.routes';
+import { taskController } from './container.js';
+import { errorHandler } from './middlewares/error-handler.js';
+import { notFoundHandler } from './middlewares/not-found.js';
+import { createTaskRouter } from './routes/task.routes.js';
 
 // The app is built separately from server.ts so tests can import it without
 // opening a network port.

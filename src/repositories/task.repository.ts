@@ -1,4 +1,4 @@
-import type { Task, TaskPriority, TaskStatus } from '../types/task';
+import type { Task, TaskPriority, TaskStatus } from '../types/task.js';
 
 // The contract the service depends on. A JSON, PostgreSQL or MongoDB
 // implementation only has to satisfy this interface.

@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
-import { AppError } from '../errors/app-error';
-import type { ErrorResponse } from '../types/api-response';
+import { AppError } from '../errors/app-error.js';
+import type { ErrorResponse } from '../types/api-response.js';
 
 // Express recognises error middleware by its 4 parameters, so `_next` must stay
 // even though it is unused.

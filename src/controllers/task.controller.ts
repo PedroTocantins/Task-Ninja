@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
-import type { TaskService } from '../services/task.service';
-import type { SuccessResponse } from '../types/api-response';
-import type { Task } from '../types/task';
+import type { TaskService } from '../services/task.service.js';
+import type { SuccessResponse } from '../types/api-response.js';
+import type { Task } from '../types/task.js';
 
 // Controllers only translate HTTP <-> service calls. No try/catch needed:
 // Express 5 forwards rejected promises to the error-handling middleware.

@@ -1,10 +1,10 @@
-import { TaskNotFoundError } from '../errors/app-error';
+import { TaskNotFoundError } from '../errors/app-error.js';
 import type {
     CreateTask,
     TaskRepository,
     UpdateTask,
-} from '../repositories/task.repository';
-import type { Task } from '../types/task';
+} from '../repositories/task.repository.js';
+import type { Task } from '../types/task.js';
 
 export class TaskService {
     // Depends on the interface, not JsonTaskRepository: the concrete class is
