@@ -15,7 +15,9 @@
     "typecheck": "tsc --noEmit",
     "migrate": "tsx src/scripts/migrate.ts",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "dotenv": "^16.6.1",
@@ -23,12 +25,17 @@
     "pg": "^8.23.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/express": "^5.0.3",
     "@types/node": "^22.15.0",
     "@types/pg": "^8.23.1",
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.14.0",
     "prettier": "3.9.10",
     "tsx": "^4.20.3",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.72.1"
   },
   "type": "module"
 }
