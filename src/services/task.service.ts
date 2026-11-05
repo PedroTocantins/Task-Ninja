@@ -13,11 +13,7 @@ export class TaskService {
 
     async listTasks(): Promise<Task[]> {
         const tasks = await this.taskRepository.findAll();
-        // Business rule: newest tasks first. Sorting lives here, not in the
-        // repository, so it survives a change of data source.
-        return [...tasks].sort((a, b) =>
-            b.createdAt.localeCompare(a.createdAt),
-        );
+        return tasks;
     }
 
     async getTaskById(id: string): Promise<Task | null> {
