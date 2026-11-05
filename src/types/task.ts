@@ -5,11 +5,11 @@ export type TaskStatus = (typeof TASK_STATUSES)[number];
 export type TaskPriority = (typeof TASK_PRIORITIES)[number];
 
 export interface Task {
-    id: string;
-    title: string;
-    description: string;
-    status: TaskStatus;
-    priority: TaskPriority;
-    createdAt: Date;
-    updatedAt: Date;
+  id: string;
+  title: string;
+  description: string;
+  status: TaskStatus;
+  priority: TaskPriority;
+  createdAt: Date;
+  updatedAt: Date;
 }

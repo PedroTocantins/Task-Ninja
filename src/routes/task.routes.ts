@@ -2,13 +2,13 @@ import { Router } from 'express';
 import type { TaskController } from '../controllers/task.controller.js';
 
 export function createTaskRouter(taskController: TaskController): Router {
-    const router = Router();
+  const router = Router();
 
-    router.get('/', taskController.list);
-    router.get('/:id', taskController.getById);
-    router.post('/', taskController.create);
-    router.patch('/:id', taskController.update);
-    router.delete('/:id', taskController.delete);
+  router.get('/', taskController.list);
+  router.get('/:id', taskController.getById);
+  router.post('/', taskController.create);
+  router.patch('/:id', taskController.update);
+  router.delete('/:id', taskController.delete);
 
-    return router;
+  return router;
 }
